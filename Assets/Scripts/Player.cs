@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
     {
         var deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         var newXPos = transform.position.x + deltaX;
-        transform.position = new Vector2(newXPos, transform.position.y);
+        var deltaY = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        var newYPos = transform.position.y + deltaY;
+        transform.position = new Vector2(newXPos, newYPos);
     }
 
 }
