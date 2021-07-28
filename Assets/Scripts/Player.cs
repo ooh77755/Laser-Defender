@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetUpMoveBoundaries();
+        StartCoroutine(CoroutineTest());
     }
 
     private void SetUpMoveBoundaries()
@@ -33,6 +34,13 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+    }
+
+    private IEnumerator CoroutineTest()
+    {
+        Debug.Log("1st msg");
+        yield return new WaitForSeconds(3);
+        Debug.Log("2nd msg");
     }
 
     void Move()
