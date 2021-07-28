@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     float yMin;
     float yMax;
     float padding = 0.5f;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] float projectileSpeed = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+        Fire();
     }
 
     void Move()
@@ -39,5 +42,14 @@ public class Player : MonoBehaviour
         var deltaY = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         var newYPos = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
         transform.position = new Vector2(newXPos, newYPos);
+    }
+
+    private void Fire()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+        }
     }
 }
